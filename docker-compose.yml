@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  database:
+    image: postgres:10
+    environment:
+      - POSTGRES_USER=websale
+      - POSTGRES_PASSWORD=websale
+    volumes:
+      - ./volumes/database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  back:
+    build: back/
+    environment:
+      - DB_HOST=database
+    ports:
+      - 8000:8000
